@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Registration</h1>
+    <form method="POST" action="/register">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="First Name">
+        <input type="text" name="last_name" placeholder="Last Name">
+        <input type="text" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="confirm" placeholder="PW Confirm">
+        <input type="submit" name="submit" placeholder="Register">
+    </form>
+    <h1>Login</h1>
+    <form method="POST" action="/login">
+        {% csrf_token %}
+        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="password" placeholder="Password">
+        <input type="submit" name="submit" value="Login">
+    </form>
+    {% for User in all %}
+    <ul>
+        <li>{{User.first_name}}</li>
+        <li>{{User.last_name}}</li>
+        <li>{{User.email}}</li>
+        <li>{{User.password}}</li>
+    </ul>
+    {% endfor %}
+</body>
+</html>
